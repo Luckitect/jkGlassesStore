@@ -16,12 +16,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/username/{username}")
-    public ResponseEntity<User> getByUsername(@PathVariable String username) {
-        Optional<User> user = userService.getByUsername(username);
-        return user.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
-    }
 
     @GetMapping("/email/{email}")
     public ResponseEntity<User> getByEmail(@PathVariable String email) {
