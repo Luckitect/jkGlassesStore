@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ratingId;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -63,11 +63,13 @@ public class Rating {
         this.user = user;
     }
 
-    public Long getRatingId() {
-        return ratingId;
+    public Long getId() {
+        return id;
     }
 
-    public void setRatingId(Long ratingId) {
-        this.ratingId = ratingId;
+    public void setId(Long id) {
+        this.id = id;
     }
+
+
 }

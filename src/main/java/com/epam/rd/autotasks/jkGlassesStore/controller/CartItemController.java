@@ -1,5 +1,6 @@
 package com.epam.rd.autotasks.jkGlassesStore.controller;
 
+import com.epam.rd.autotasks.jkGlassesStore.dto.CartItemDTO;
 import com.epam.rd.autotasks.jkGlassesStore.model.Cart;
 import com.epam.rd.autotasks.jkGlassesStore.model.CartItem;
 import com.epam.rd.autotasks.jkGlassesStore.service.CartItemService;
@@ -8,10 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/cart-items")
+@RequestMapping("/cart-items")
 public class CartItemController {
 
     private final CartItemService cartItemService;
@@ -22,16 +23,24 @@ public class CartItemController {
         this.cartService = cartService;
     }
 
-
-
+    private CartItemDTO toCartItemDTO(CartItem item) {
+        CartItemDTO dto = new CartItemDTO();
+        dto.setId(item.getId());
+        dto.setProductId(item.getProduct().getId());
+        dto.setProductName(item.getProduct().getName());
+        dto.setPrice(item.getProduct().getPrice());
+        dto.setQuantity(item.getQuantity());
+        return dto;
+    }
+//get items from user მუშაობს
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<CartItem>> getItemsByUserCart(@PathVariable Long userId) {
-        Optional<Cart> cartOpt = cartService.getCartByUser(userId);
-        if (cartOpt.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        List<CartItem> items = cartItemService.getByCart(cartOpt.get());
-        return ResponseEntity.ok(items);
+    public ResponseEntity<List<CartItemDTO>> getItemsByUserCart(@PathVariable Long userId) {
+        return cartService.getCartByUser(userId)
+                .map(cart -> cartItemService.getByCart(cart)
+                        .stream()
+                        .map(this::toCartItemDTO)
+                        .collect(Collectors.toList()))
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }

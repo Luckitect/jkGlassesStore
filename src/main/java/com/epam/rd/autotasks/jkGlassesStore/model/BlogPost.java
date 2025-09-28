@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public class BlogPost {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long PostId;
+    private Long id;
     private LocalDateTime createdAt;
     private String title;
 
@@ -52,11 +52,11 @@ public class BlogPost {
         this.createdAt = createdAt;
     }
 
-    public Long getPostId() {
-        return PostId;
+    public Long getId() {
+        return id;
     }
 
-    public void setPostId(Long postId) {
-        PostId = postId;
+    public void setId(Long id) {
+        this.id = id;
     }
 }

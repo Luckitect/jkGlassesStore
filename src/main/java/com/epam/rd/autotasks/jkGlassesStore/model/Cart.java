@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long cartId;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -44,11 +44,11 @@ public class Cart {
         this.user = user;
     }
 
-    public Long getCartId() {
-        return cartId;
+    public Long getId() {
+        return id;
     }
 
-    public void setCartId(Long cartId) {
-        this.cartId = cartId;
+    public void setId(Long id) {
+        this.id = id;
     }
 }

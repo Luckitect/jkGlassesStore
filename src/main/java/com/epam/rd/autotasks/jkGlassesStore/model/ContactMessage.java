@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "contact_massages")
-public class ContactMassage {
+public class ContactMessage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long messageId;

@@ -7,7 +7,7 @@ import java.util.List;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long categoryId;
+    private Long id;
     private String name;
     private String type;
 
@@ -38,11 +38,11 @@ public class Category {
         this.name = name;
     }
 
-    public Long getCategoryId() {
-        return categoryId;
+    public Long getId() {
+        return id;
     }
 
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
+    public void setId(Long id) {
+        this.id = id;
     }
 }

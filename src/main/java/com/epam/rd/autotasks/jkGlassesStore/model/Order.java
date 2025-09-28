@@ -1,5 +1,7 @@
 package com.epam.rd.autotasks.jkGlassesStore.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.util.List;
 import java.time.LocalDateTime;
@@ -19,6 +21,7 @@ public class Order {
     private User user;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+
     private List<OrderItem> items;
 
     //Total amount

@@ -1,28 +1,36 @@
 package com.epam.rd.autotasks.jkGlassesStore.controller;
 
-import com.epam.rd.autotasks.jkGlassesStore.model.ContactMassage;
-import com.epam.rd.autotasks.jkGlassesStore.service.ContactMessageService;
+import com.epam.rd.autotasks.jkGlassesStore.model.ContactMessage;
+import com.epam.rd.autotasks.jkGlassesStore.repository.ContactMessageRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/contact-messages")
+@RequestMapping("/contact-messages")
 public class ContactMessageController {
 
-    private final ContactMessageService contactMessageService;
+    private final ContactMessageRepository contactMessageRepository;
 
-    public ContactMessageController(ContactMessageService contactMessageService) {
-        this.contactMessageService = contactMessageService;
+    public ContactMessageController(ContactMessageRepository contactMessageRepository) {
+        this.contactMessageRepository = contactMessageRepository;
     }
 
-    @GetMapping("/email/{email}")
-    public ResponseEntity<List<ContactMassage>> getMessagesByEmail(@PathVariable String email) {
-        List<ContactMassage> messages = contactMessageService.getMessagesByEmail(email);
-        if (messages.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
+
+    //Create new messages მუშაობს
+    @PostMapping
+    public ResponseEntity<ContactMessage> createMessage(@RequestBody ContactMessage message) {
+        ContactMessage saved = contactMessageRepository.save(message);
+        return ResponseEntity.ok(saved);
+    }
+
+    //Get all massages მუშაობს
+    @GetMapping
+    public ResponseEntity<List<ContactMessage>> getAllMessages() {
+        List<ContactMessage> messages = contactMessageRepository.findAll();
         return ResponseEntity.ok(messages);
     }
+
+
 }

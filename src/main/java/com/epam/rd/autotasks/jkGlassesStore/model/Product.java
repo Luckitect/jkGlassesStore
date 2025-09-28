@@ -1,5 +1,7 @@
 package com.epam.rd.autotasks.jkGlassesStore.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -8,7 +10,7 @@ import java.util.List;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ProductId;
+    private Long id;
     private String name;
     private double price;
     private String size;
@@ -17,16 +19,19 @@ public class Product {
     private boolean polarized;
     private int stock;
     private boolean sale;
-
+    private String imageUrl;
     @ManyToOne
     @JoinColumn(name = "category_id")
+    @JsonBackReference
     private Category category;
 
     @ManyToOne
     @JoinColumn(name = "brand_id")
+    @JsonIgnoreProperties("products")
     private Brand brand;
 
     @OneToMany(mappedBy = "product")
+    @JsonIgnoreProperties("{product}")
     private List<OrderItem> orderItems;
 
     public List<OrderItem> getOrderItems() {
@@ -117,11 +122,19 @@ public class Product {
         this.name = name;
     }
 
-    public Long getProductId() {
-        return ProductId;
+    public Long getId() {
+        return id;
     }
 
-    public void setProductId(Long productId) {
-        ProductId = productId;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

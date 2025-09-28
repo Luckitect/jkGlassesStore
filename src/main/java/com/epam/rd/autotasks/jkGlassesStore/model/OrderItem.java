@@ -8,6 +8,11 @@ public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
+    private int quantity;
+    @Column(nullable = false)
+    private double price;
+
 
     public Product getProduct() {
         return product;
@@ -41,5 +46,19 @@ public class OrderItem {
     @JoinColumn(name = "product_id")
     private Product product;
 
+    public double getPrice() {
+        return price;
+    }
 
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 }
