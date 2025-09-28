@@ -12,8 +12,8 @@ public class ProductDTO {
     private boolean sale;
     private String imageUrl;
 
-    private Long brandId;       // keep as Long
-    private Long categoryId;    // keep as Long
+    private Long brandId;
+    private Long categoryId;
 
     // Getters and Setters
     public Long getId() { return id; }

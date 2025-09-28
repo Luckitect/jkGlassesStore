@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/contact-messages")
+@CrossOrigin(origins = "*") //allowed to be called from other origins მაგალითად ფრონტენდმა რო გამოიძახოს, * არის wildcard
 public class ContactMessageController {
 
     private final ContactMessageRepository contactMessageRepository;

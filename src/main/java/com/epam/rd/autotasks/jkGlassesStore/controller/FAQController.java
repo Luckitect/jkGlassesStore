@@ -11,6 +11,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/faqs")
 public class FAQController {
-
+//ამას აღარ ვაკეთებ
 
 }
